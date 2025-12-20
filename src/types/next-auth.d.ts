@@ -1,0 +1,29 @@
+import "next-auth";
+import "next-auth/jwt";
+
+declare module "next-auth" {
+  interface Session {
+    accessToken?: string;
+    idToken?: string;
+    refreshToken?: string;
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      currentAgency?: string;
+      agencies?: string[];
+    };
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    accessToken?: string;
+    idToken?: string;
+    refreshToken?: string;
+    sub?: string;
+    groups?: string[];
+    currentAgency?: string;
+  }
+}
