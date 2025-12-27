@@ -8,7 +8,7 @@ export default function ConnectedLayout({
   return (
     <div>
       <NavMenu />
-      <main>{children}</main>
+      <main className="py-2 px-6">{children}</main>
     </div>
   );
 }

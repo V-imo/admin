@@ -126,6 +126,7 @@ export interface paths {
                             zipCode: string;
                             country: string;
                         };
+                        timezone: string;
                     };
                 };
             };
@@ -186,6 +187,7 @@ export interface components {
                 zipCode: string;
                 country: string;
             };
+            timezone: string;
         };
     };
     responses: never;

@@ -4,13 +4,14 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import LoginForm from "@/components/auth/login-form";
+import { isSessionExpired } from "@/lib/utils";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "authenticated" && session) {
+    if (status === "authenticated" && session && !isSessionExpired(session)) {
       router.push("/");
     }
   }, [session, status, router]);

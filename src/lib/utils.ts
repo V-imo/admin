@@ -12,3 +12,13 @@ export function getClientHeaders(session: Session | null) {
   }
   return { Authorization: session.idToken };
 }
+
+export function isSessionExpired(session: Session | null) {
+  if(!session) {
+    return true;
+  }
+  if (!session?.expires && new Date(session.expires) < new Date()) {
+    return true;
+  }
+  return false;
+}

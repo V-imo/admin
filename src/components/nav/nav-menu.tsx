@@ -1,21 +1,32 @@
-"use client";
+"use server";
 
-import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
-import { signOut } from "next-auth/react";
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "../ui/navigation-menu";
+import LogOutButton from "./log-out";
 
-export default function NavMenu() {
+const pages = [
+  {
+    title: "Agencies",
+    href: "/",
+  },
+  {
+    title: "Create Agency",
+    href: "/create-agency",
+  },
+];
+
+
+
+export default async function NavMenu() {
   return (
-    <div>
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => signOut({ callbackUrl: "/login" })}
-        className="flex items-center gap-2"
-      >
-        <LogOut className="h-4 w-4" />
-        Sign out
-      </Button>
-    </div>
+    <NavigationMenu className="flex justify-between max-w-full w-full border-b p-2 mb-2">
+      <NavigationMenuList>
+        {pages.map((page) => (
+          <NavigationMenuItem key={page.href}>
+            <NavigationMenuLink href={page.href}>{page.title}</NavigationMenuLink>
+          </NavigationMenuItem>
+        ))}
+      </NavigationMenuList>
+      <LogOutButton />
+    </NavigationMenu>
   );
 }

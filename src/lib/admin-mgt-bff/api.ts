@@ -11,7 +11,10 @@ export const getAgency = async (agencyId: string, session: Session) => {
   return response.data as Agency;
 };
 
-export const createAgency = async (agency: Agency, session: Session) => {
+export const createAgency = async (
+  agency: Omit<Agency, "agencyId">,
+  session: Session
+) => {
   const headers = getClientHeaders(session);
   const response = await client.POST("/agency", {
     body: agency,
