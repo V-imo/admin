@@ -15,6 +15,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 
 export default function UpdateAgencyForm(props: { agency: Agency }) {
   const { data: session } = useSession();
@@ -34,6 +35,7 @@ export default function UpdateAgencyForm(props: { agency: Agency }) {
 
   return (
     <form onSubmit={action}>
+      <Label>Name</Label>
       <Input
         type="text"
         name="name"
@@ -41,7 +43,9 @@ export default function UpdateAgencyForm(props: { agency: Agency }) {
         value={agency.name}
         onChange={(e) => setAgency({ ...agency, name: e.target.value })}
         required
+        className="w-[200px]"
       />
+      <Label>Contact Mail</Label>
       <Input
         type="email"
         name="contactMail"
@@ -49,18 +53,22 @@ export default function UpdateAgencyForm(props: { agency: Agency }) {
         value={agency.contactMail}
         onChange={(e) => setAgency({ ...agency, contactMail: e.target.value })}
         required
+        className="w-[200px]"
       />
+      <Label>Contact Phone</Label>
       <Input
         type="tel"
         name="contactPhone"
         placeholder="Contact Phone"
         value={agency.contactPhone}
         onChange={(e) => setAgency({ ...agency, contactPhone: e.target.value })}
+        className="w-[200px]"
       />
 
-      <Separator />
+      <Separator className="m-2 mt-5"/>
 
       <h2>Address</h2>
+      <Label>Number</Label>
       <Input
         type="text"
         name="address.number"
@@ -73,7 +81,9 @@ export default function UpdateAgencyForm(props: { agency: Agency }) {
           })
         }
         required
+        className="w-[200px]"
       />
+      <Label>Street</Label>
       <Input
         type="text"
         name="address.street"
@@ -86,7 +96,9 @@ export default function UpdateAgencyForm(props: { agency: Agency }) {
           })
         }
         required
+        className="w-[200px]"
       />
+      <Label>City</Label>
       <Input
         type="text"
         name="address.city"
@@ -99,7 +111,9 @@ export default function UpdateAgencyForm(props: { agency: Agency }) {
           })
         }
         required
+        className="w-[200px]"
       />
+      <Label>Zip Code</Label>
       <Input
         type="text"
         name="address.zipCode"
@@ -112,7 +126,9 @@ export default function UpdateAgencyForm(props: { agency: Agency }) {
           })
         }
         required
+        className="w-[200px]"
       />
+      <Label>Country</Label>
       <Select
         name="address.country"
         value={`${agency.address.country}|${agency.timezone}`}
@@ -126,6 +142,7 @@ export default function UpdateAgencyForm(props: { agency: Agency }) {
             timezone: value.split("|")[1],
           })
         }
+        required
       >
         <SelectTrigger className="w-[200px]">
           <SelectValue placeholder="Select Country" />

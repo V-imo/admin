@@ -1,6 +1,3 @@
-import { getAgency } from "@/lib/admin-mgt-bff/api";
-import { auth } from "@/lib/auth";
-import { notFound, redirect } from "next/navigation";
 import { TabsContent, TabsList, TabsTrigger, Tabs } from "../ui/tabs";
 import AgencyInfo from "./components/info";
 import AgencyEmployee from "./components/employee";
@@ -11,14 +8,6 @@ export default async function AgencyPage({
   params: { agencyId: string };
 }) {
   const { agencyId } = await params;
-  const session = await auth();
-  if (!session) {
-    return redirect("/login");
-  }
-  const agency = await getAgency(agencyId, session);
-  if (!agency) {
-    return notFound();
-  }
   return (
     <Tabs defaultValue="overview">
       <TabsList>
@@ -37,7 +26,7 @@ export default async function AgencyPage({
         forceMount
         className="data-[state=inactive]:hidden"
       >
-        <AgencyEmployee />
+        <AgencyEmployee agencyId={agencyId}/>
       </TabsContent>
     </Tabs>
   );
